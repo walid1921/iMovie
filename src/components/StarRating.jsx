@@ -1,13 +1,34 @@
 import { useState } from "react"
+import PropTypes from 'prop-types'
 
 const container = { display: 'flex', alignItems: 'center', gap: '16px' }
 const star = { display: 'flex' }
 
 
+// To make default value, to make it obvious what kind of prams we are expecting
+StarRating.propTypes = {
+  maxRating: PropTypes.number,
+  defaultRating: PropTypes.number,
+  color: PropTypes.string,
+  size: PropTypes.number,
+  messages: PropTypes.array,
+  className: PropTypes.string,
+  onSetRating: PropTypes.func,
+}
 
 
-export default function StarRating({ maxRating = 5, color = '#fcc419', size = 48 }) {
-  const [rating, setRating] = useState(0)
+
+
+export default function StarRating({
+  maxRating = 5,
+  color = '#fcc419',
+  size = 48,
+  className = "",
+  messages = [],
+  defaultRating = 0,
+  onSetRating
+  , }) {
+  const [rating, setRating] = useState(defaultRating)
   const [tempRating, setTempRating] = useState(0)
 
   const text = { lineHeight: '1', margin: '0', color, fontSize: `${size / 1.5}px` }
@@ -15,10 +36,11 @@ export default function StarRating({ maxRating = 5, color = '#fcc419', size = 48
 
   function handleRating(rating) {
     setRating(rating)
+    onSetRating(rating)
   }
 
   return (
-    <div style={container}>
+    <div style={container} className={className}>
 
       <div style={star}>
         {Array.from({ length: maxRating }, (_, i) => (
@@ -34,7 +56,7 @@ export default function StarRating({ maxRating = 5, color = '#fcc419', size = 48
         ))}
       </div>
 
-      <p style={text}>{tempRating || rating || ''}</p>
+      <p style={text}>{messages.length === maxRating ? messages[tempRating ? tempRating - 1 : rating - 1] : tempRating || rating || ''}</p>
 
     </div>
   )

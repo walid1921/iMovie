@@ -3,12 +3,12 @@ import NumResults from "./NumResults";
 import SearchBar from "./SearchBar";
 
 
-function Navbar({movies}) {
+function Navbar({movies, query, setQuery}) {
 
   return (
     <nav className="nav-bar">
       <Logo />
-      <SearchBar />
+      <SearchBar query={query} setQuery={setQuery} />
       <NumResults movies={movies} />
     </nav>
   )
