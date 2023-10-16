@@ -1,6 +1,6 @@
 
 
-function MovieList({ movies, handleSelectedMovie, handleCloseMovie }) {
+function MovieList({ movies, handleSelectedMovie }) {
   return (
     <ul className="list list-movies">
       {movies?.map((movie) => (

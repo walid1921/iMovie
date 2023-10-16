@@ -15,7 +15,7 @@ import MovieDetails from "./components/MovieDetails";
 const KEY = '52788a36'
 
 export default function App() {
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState("new");
   const [movies, setMovies] = useState([]);
   const [watched, setWatched] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -30,6 +30,15 @@ export default function App() {
 
   function handleCloseMovie() {
     setSelectedId(null)
+  }
+
+  function handleAddWatched(movie) {
+    setWatched(watched => [...watched, movie])
+  }
+
+  function handleDeleteWatched(id) {
+    setWatched(watched => watched.filter(movie => movie.imdbID !== id))
+
   }
 
 
@@ -88,13 +97,17 @@ export default function App() {
         </Box>
 
         <Box>
-          {selectedId ? <MovieDetails selectedId={selectedId} handleCloseMovie={handleCloseMovie} /> :
+          {selectedId ? <MovieDetails
+            selectedId={selectedId}
+            handleCloseMovie={handleCloseMovie} handleAddWatched={handleAddWatched}
+            watched={watched}
+          /> :
             (<>
               <div className="summary">
                 <h2>Movies you watched</h2>
                 <WatchedSummary watched={watched} />
               </div>
-              <WatchedList watched={watched} />
+              <WatchedList watched={watched} handleDeleteWatched={handleDeleteWatched} />
             </>)}
         </Box>
 
