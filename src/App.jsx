@@ -22,6 +22,8 @@ export default function App() {
   const [error, setError] = useState("");
   const [selectedId, setSelectedId] = useState(null);
 
+  console.log(query)
+
   function handleSelectedMovie(id) {
     setSelectedId((selectedId) => (id === selectedId ? null : id))
   }
@@ -48,6 +50,8 @@ export default function App() {
     setError("")
     try {
       const response = await fetch(`http://www.omdbapi.com/?apikey=${KEY}&s=${query}`);
+
+      // API Documentation https://www.omdbapi.com/
 
       if (!response.ok) {
         throw new Error("Network response was not ok");
