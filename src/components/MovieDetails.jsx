@@ -47,9 +47,26 @@ function MovieDetails({ selectedId, handleCloseMovie, handleAddWatched, watched 
     handleCloseMovie()
   }
 
+
+  // Handling keypress event 
+  useEffect(() => {
+    function escape (e){
+      if (e.code === 'Escape') {
+        handleCloseMovie();
+    }}
+
+    document.addEventListener('keydown', escape)
+
+    return function () {
+      document.removeEventListener('keydown', escape)
+    }
+  }, [handleCloseMovie])
+
+
+
   useEffect(() => {
     fetchMovieDetails()
-  }, [selectedId])
+  }, [selectedId, ])
 
 
   async function fetchMovieDetails() {

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
-import data from "./assets/data";
+// import data from "./assets/data";
 import Main from "./components/Main";
 import Box from "./components/Box";
 // import WatchBox from "./components/WatchBox";
@@ -15,14 +15,14 @@ import MovieDetails from "./components/MovieDetails";
 const KEY = '52788a36'
 
 export default function App() {
-  const [query, setQuery] = useState("new");
+  const [query, setQuery] = useState("");
   const [movies, setMovies] = useState([]);
   const [watched, setWatched] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [selectedId, setSelectedId] = useState(null);
 
-  console.log(query)
+
 
   function handleSelectedMovie(id) {
     setSelectedId((selectedId) => (id === selectedId ? null : id))
@@ -50,37 +50,41 @@ export default function App() {
       return
     }
 
+    async function fetchData() {
+      setIsLoading(true);
+      setError("")
+      try {
+        const response = await fetch(`http://www.omdbapi.com/?apikey=${KEY}&s=${query}`);
+
+        // API Documentation https://www.omdbapi.com/
+
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+
+        const data = await response.json();
+
+        if (data.Response === 'False') throw new Error("Movie not found")
+
+        setMovies(data.Search);
+        setIsLoading(false)
+
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setError(error.message);
+
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    handleCloseMovie()
     fetchData()
+
   }, [query])
 
 
-  async function fetchData() {
-    setIsLoading(true);
-    setError("")
-    try {
-      const response = await fetch(`http://www.omdbapi.com/?apikey=${KEY}&s=${query}`);
 
-      // API Documentation https://www.omdbapi.com/
-
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-
-      const data = await response.json();
-
-      if (data.Response === 'False') throw new Error("Movie not found")
-
-      setMovies(data.Search);
-      setIsLoading(false)
-
-    } catch (error) {
-      console.error("Error fetching data:", error);
-      setError(error.message);
-
-    } finally {
-      setIsLoading(false)
-    }
-  }
 
 
   return (
