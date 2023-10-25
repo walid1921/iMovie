@@ -10,6 +10,7 @@ import WatchedList from './components/WatchedList'
 import Loader from "./components/Loader";
 import ErrorMessage from "./components/ErrorMessage";
 import MovieDetails from "./components/MovieDetails";
+import useLocalStorageState from "./components/useLocalStorageState";
 
 
 const KEY = '52788a36'
@@ -21,12 +22,7 @@ export default function App() {
   const [error, setError] = useState("");
   const [selectedId, setSelectedId] = useState(null);
   
-  // const [watched, setWatched] = useState([]); 
-  // we change it like down because we want to save it li initial data in local storage when we reload the page
-  const [watched, setWatched] = useState(function () {
-    const storedValue = localStorage.getItem("watched");
-    return JSON.parse(storedValue)
-  });
+  const [watched, setWatched] = useLocalStorageState([], 'watched'); 
 
 
   function handleSelectedMovie(id) {
@@ -46,9 +42,7 @@ export default function App() {
 
   }
 
-  useEffect(function () {
-    localStorage.setItem("watched", JSON.stringify(watched))
-  }, [watched]) // we have to call it here so that it called every time the data is rendered
+  
 
 
   useEffect(() => {
