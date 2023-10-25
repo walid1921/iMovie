@@ -1,6 +1,6 @@
 
-function SearchBar({query, setQuery}) {
-  
+function SearchBar({ query, setQuery }) {
+
   return (
     <div>
       <input
@@ -9,6 +9,7 @@ function SearchBar({query, setQuery}) {
         placeholder="Search movies..."
         value={query}
         onChange={(e) => setQuery(e.target.value)}
+        
       />
     </div>
   )

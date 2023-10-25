@@ -17,11 +17,16 @@ const KEY = '52788a36'
 export default function App() {
   const [query, setQuery] = useState("");
   const [movies, setMovies] = useState([]);
-  const [watched, setWatched] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [selectedId, setSelectedId] = useState(null);
-
+  
+  // const [watched, setWatched] = useState([]); 
+  // we change it like down because we want to save it li initial data in local storage when we reload the page
+  const [watched, setWatched] = useState(function () {
+    const storedValue = localStorage.getItem("watched");
+    return JSON.parse(storedValue)
+  });
 
 
   function handleSelectedMovie(id) {
@@ -40,6 +45,10 @@ export default function App() {
     setWatched(watched => watched.filter(movie => movie.imdbID !== id))
 
   }
+
+  useEffect(function () {
+    localStorage.setItem("watched", JSON.stringify(watched))
+  }, [watched]) // we have to call it here so that it called every time the data is rendered
 
 
   useEffect(() => {

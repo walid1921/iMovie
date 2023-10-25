@@ -6,9 +6,10 @@ const average = (arr) =>
 function WatchedSummary({ watched }) {
 
 
-  const avgImdbRating = average(watched.map((movie) => movie.imdbRating));
-  const avgUserRating = average(watched.map((movie) => movie.userRating));
-  const avgRuntime = average(watched.map((movie) => movie.runtime));
+  const avgImdbRating = watched?.length ? average(watched.map((movie) => movie.imdbRating)) : 0;
+const avgUserRating = watched?.length ? average(watched.map((movie) => movie.userRating)) : 0;
+const avgRuntime = watched?.length ? average(watched.map((movie) => movie.runtime)) : 0;
+
 
   return (
     <div>
