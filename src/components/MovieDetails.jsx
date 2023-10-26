@@ -59,7 +59,7 @@ useKey('Escape', handleCloseMovie)
       setIsLoading(true);
       setError("")
       try {
-        const response = await axios.get(`http://www.omdbapi.com/?apikey=${KEY}&i=${selectedId}`);
+        const response = await axios.get(`https://www.omdbapi.com/?apikey=${KEY}&i=${selectedId}`);
 
         const data = response.data;
 
