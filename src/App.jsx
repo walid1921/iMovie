@@ -21,7 +21,7 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [selectedId, setSelectedId] = useState(null);
-  const [watched, setWatched] = useLocalStorageState([], 'watched');
+  const [watched, setWatched] = useLocalStorageState([], 'watched'); 
 
 
   function handleSelectedMovie(id) {
@@ -40,7 +40,7 @@ export default function App() {
     setWatched(watched => watched.filter(movie => movie.imdbID !== id))
   }
 
-
+  
 
 
   useEffect(() => {
@@ -51,28 +51,30 @@ export default function App() {
       return
     }
 
-    const fetchData = async () => {
+    async function fetchData() {
+      setIsLoading(true);
+      setError("")
       try {
-
-        setIsLoading(true)
-
         const response = await axios.get(`http://www.omdbapi.com/?apikey=${KEY}&s=${query}`)
 
         const data = response.data;
+
+        if (data.Response === 'False') throw new Error("Movie not found")
+
         setMovies(data.Search);
         setIsLoading(false)
-        
-        if (data.Response === 'False') throw new Error("Movie not found")
 
       } catch (error) {
         console.error("Error fetching data:", error);
         setError(error.message);
+
+      } finally {
         setIsLoading(false)
       }
     }
 
-    fetchData()
     handleCloseMovie()
+    fetchData()
 
   }, [query])
 
