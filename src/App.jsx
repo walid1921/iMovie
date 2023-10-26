@@ -55,7 +55,7 @@ export default function App() {
       setIsLoading(true);
       setError("")
       try {
-        const response = await axios.get(`http://www.omdbapi.com/?apikey=${KEY}&s=${query}`)
+        const response = await axios.get(`https://www.omdbapi.com/?apikey=${KEY}&s=${query}`)
 
         const data = response.data;
 
