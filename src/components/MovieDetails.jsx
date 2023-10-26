@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import StarRating from './StarRating'
 import Loader from './Loader';
 import ErrorMessage from './ErrorMessage';
+import useKey from './useKey';
 
 const KEY = '52788a36'
 
@@ -49,51 +50,42 @@ function MovieDetails({ selectedId, handleCloseMovie, handleAddWatched, watched 
 
 
   // Handling keypress event 
-  useEffect(() => {
-    function escape (e){
-      if (e.code === 'Escape') {
-        handleCloseMovie();
-    }}
-
-    document.addEventListener('keydown', escape)
-
-    return function () {
-      document.removeEventListener('keydown', escape)
-    }
-  }, [handleCloseMovie])
+useKey('Escape', handleCloseMovie)
 
 
 
   useEffect(() => {
-    fetchMovieDetails()
-  }, [selectedId, ])
+    async function fetchMovieDetails() {
+      setIsLoading(true);
+      setError("")
+      try {
+        const response = await fetch(`http://www.omdbapi.com/?apikey=${KEY}&i=${selectedId}`);
 
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
 
-  async function fetchMovieDetails() {
-    setIsLoading(true);
-    setError("")
-    try {
-      const response = await fetch(`http://www.omdbapi.com/?apikey=${KEY}&i=${selectedId}`);
+        const data = await response.json();
 
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
+        if (data.Response === 'False') throw new Error("Movie not found")
+
+        setMovie(data)
+        setIsLoading(false)
+
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setError(error.message);
+      } finally {
+        setIsLoading(false)
       }
 
-      const data = await response.json();
-
-      if (data.Response === 'False') throw new Error("Movie not found")
-
-      setMovie(data)
-      setIsLoading(false)
-
-    } catch (error) {
-      console.error("Error fetching data:", error);
-      setError(error.message);
-    } finally {
-      setIsLoading(false)
     }
 
-  }
+    fetchMovieDetails()
+  }, [selectedId,])
+
+
+
 
 
   return (
