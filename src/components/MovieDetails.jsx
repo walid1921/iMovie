@@ -4,7 +4,7 @@ import StarRating from './StarRating'
 import Loader from './Loader';
 import ErrorMessage from './ErrorMessage';
 import useKey from './useKey';
-
+import axios from 'axios';
 const KEY = '52788a36'
 
 
@@ -59,13 +59,9 @@ useKey('Escape', handleCloseMovie)
       setIsLoading(true);
       setError("")
       try {
-        const response = await fetch(`http://www.omdbapi.com/?apikey=${KEY}&i=${selectedId}`);
+        const response = await axios.get(`http://www.omdbapi.com/?apikey=${KEY}&i=${selectedId}`);
 
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-
-        const data = await response.json();
+        const data = response.data;
 
         if (data.Response === 'False') throw new Error("Movie not found")
 

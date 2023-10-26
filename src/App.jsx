@@ -3,7 +3,6 @@ import Navbar from "./components/Navbar";
 // import data from "./assets/data";
 import Main from "./components/Main";
 import Box from "./components/Box";
-// import WatchBox from "./components/WatchBox";
 import MovieList from "./components/MovieList";
 import WatchedSummary from './components/WatchedSummary'
 import WatchedList from './components/WatchedList'
@@ -11,6 +10,7 @@ import Loader from "./components/Loader";
 import ErrorMessage from "./components/ErrorMessage";
 import MovieDetails from "./components/MovieDetails";
 import useLocalStorageState from "./components/useLocalStorageState";
+import axios from 'axios';
 
 
 const KEY = '52788a36'
@@ -21,7 +21,6 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [selectedId, setSelectedId] = useState(null);
-  
   const [watched, setWatched] = useLocalStorageState([], 'watched'); 
 
 
@@ -39,7 +38,6 @@ export default function App() {
 
   function handleDeleteWatched(id) {
     setWatched(watched => watched.filter(movie => movie.imdbID !== id))
-
   }
 
   
@@ -57,15 +55,9 @@ export default function App() {
       setIsLoading(true);
       setError("")
       try {
-        const response = await fetch(`http://www.omdbapi.com/?apikey=${KEY}&s=${query}`);
+        const response = await axios.get(`http://www.omdbapi.com/?apikey=${KEY}&s=${query}`)
 
-        // API Documentation https://www.omdbapi.com/
-
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-
-        const data = await response.json();
+        const data = response.data;
 
         if (data.Response === 'False') throw new Error("Movie not found")
 
@@ -93,7 +85,6 @@ export default function App() {
   return (
     <>
       <Navbar movies={movies} query={query} setQuery={setQuery} />
-
 
       <Main movies={movies} watched={watched}>
 
