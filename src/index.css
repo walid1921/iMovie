@@ -164,10 +164,6 @@ background-image: linear-gradient(135deg, #8BC6EC 0%, #9599E2 100%);
   /* overflow: scroll; */
 }
 
-.list-watched {
-  height: calc(100% - 9rem);
-}
-
 .list.list-movies li {
   cursor: pointer;
   transition: all 0.3s;
@@ -176,6 +172,45 @@ background-image: linear-gradient(135deg, #8BC6EC 0%, #9599E2 100%);
 .list.list-movies li:hover {
   background-color: #9599E2;
 }
+
+.list-watched {
+  height: calc(100% - 9rem);
+}
+
+.watchedList li {
+  position: relative;
+  display: grid;
+  grid-template-columns: 4rem 1fr;
+  grid-template-rows: auto auto;
+  column-gap: 2.4rem;
+  font-size: 1.6rem;
+  align-items: center;
+
+  padding: 1.6rem 3.2rem;
+  border-bottom: 1px solid var(--color-background-100);
+}
+
+.watchedList img {
+  width: 100%;
+  grid-row: 1 / -1;
+}
+
+.watchedList h3 {
+  font-size: 1.8rem;
+}
+
+.watchedList div {
+  display: flex;
+  align-items: center;
+  gap: 2.4rem;
+}
+
+.watchedList p {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
 
 
 .btn-delete {

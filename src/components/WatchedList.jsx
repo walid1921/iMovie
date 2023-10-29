@@ -2,7 +2,7 @@
 
 function WatchedList({ watched, handleDeleteWatched }) {
   return (
-    <ul className="list">
+    <ul className="watchedList">
       {watched.map((movie) => (
         <li key={movie.imdbID}>
           <img src={movie.poster} alt={`${movie.title} poster`} />
