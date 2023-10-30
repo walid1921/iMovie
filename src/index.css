@@ -56,8 +56,8 @@ background-image: linear-gradient(135deg, #8BC6EC 0%, #9599E2 100%);
 }
 
 .box {
-  width: 42rem;
-  max-width: 42rem;
+  width: 60rem;
+  max-width: 60rem;
   background-color: #7376c0;
   border-radius: 0.9rem;
   /* overflow: scroll; */
@@ -237,14 +237,18 @@ background-image: linear-gradient(135deg, #8BC6EC 0%, #9599E2 100%);
 
 .summary {
   padding: 2.2rem 3.2rem 1.8rem 3.2rem;
+  margin-left: 1rem;
+  margin-right: 6px;
   border-radius: 0.9rem;
   background-color: #9599E2;
   box-shadow: 0 1.2rem 2.4rem rgba(0, 0, 0, 0.2);
+  /* width: 59rem; */
 }
 
 .summary h2 {
   text-transform: uppercase;
   font-size: 1.6rem;
+  font-weight: bold;
   margin-bottom: 0.6rem;
 }
 
