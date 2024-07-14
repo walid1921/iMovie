@@ -33,3 +33,11 @@ https://github.com/user-attachments/assets/f4d69f01-1633-4f98-8323-67e5b7ad4d14
 - Learned how to work with the most important hooks like useState, useRef and useEffect, including how to clean the Effect up.
 - Learned how to make the components reusable to be used in the app. Additionally, learned the importance of keeping the code clean and organized for future improvements.
 
+## 🚦 Running the Project
+
+To run the project in your local environment, follow these steps:
+
+1. Clone the repository to your local machine.
+2. Run `npm install` or `yarn` in the project directory to install the required dependencies.
+3. Run `npm run start` or `yarn start` to get the project started.
+4. Open [http://localhost:5173](http://localhost:5173) (or the address shown in your console) in your web browser to view the app.
