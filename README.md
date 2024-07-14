@@ -1,4 +1,4 @@
-# GroomGrid
+# 🎬 iMovie
 
 iMovie is a Movie App with API integration. It lets users search, save and rate their favorites movies.
 
@@ -10,11 +10,7 @@ https://github.com/user-attachments/assets/f4d69f01-1633-4f98-8323-67e5b7ad4d14
 
 ## 🛠️ Technologies & Tools Used
 
-**`React`**  
-**`CSS`**
-**`Local storage`**
-**`React Icons`**
-**`Netlify`**
+**`React`**  **`CSS`** **`Local storage`** **`React Icons`** **`Netlify`**
 
 ## 👾 Features
 
