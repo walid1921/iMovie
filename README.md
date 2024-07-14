@@ -30,7 +30,7 @@ https://github.com/user-attachments/assets/f4d69f01-1633-4f98-8323-67e5b7ad4d14
 
 ## 🎯 Learning
 
-- Learned how to work with the most important hooks like useState, useRef and useEffect, including how to clean the Effect up.
+- Learned how to work with the most important hooks like useState, useRef, useContext and useEffect, including how to clean the Effect up.
 - Learned how to make the components reusable to be used in the app. Additionally, learned the importance of keeping the code clean and organized for future improvements.
 
 ## 🚦 Running the Project
